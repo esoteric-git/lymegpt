@@ -2,6 +2,7 @@ import streamlit as st
 import boto3
 import json
 import os
+from dotenv import load_dotenv
 
 # Custom CSS to set font styling, remove rounded corners, and change hover colors
 st.markdown("""
@@ -74,11 +75,31 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-region = boto3.Session().region_name
-session = boto3.Session(region_name=region)
-lambda_client = session.client('lambda')
+# Load environment variables from .env file
+load_dotenv()
 
-st.title("LymeGPT")
+# Access environment variables
+aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
+aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
+aws_region = os.getenv('AWS_DEFAULT_REGION')
+
+# Use the credentials to create a Boto3 client
+lambda_client = boto3.client(
+    'lambda',
+    aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key,
+    region_name=aws_region
+)
+
+
+# region = boto3.Session().region_name
+# session = boto3.Session(region_name=region)
+# lambda_client = session.client('lambda')
+
+#st.title("LymeGPT - Let's Heal Lyme Step By Step")
+# Title with a line break
+#st.markdown("# LymeGPT\nLet's Heal Lyme Step By Step")
+st.markdown("<h1>LymeGPT</h1><h3>Let's Heal Lyme Step By Step</h3><br>", unsafe_allow_html=True)
 
 sessionId = ""
 
