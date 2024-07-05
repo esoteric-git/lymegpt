@@ -1,5 +1,5 @@
-# Ignore the virtual environment directory
+# Ignore the virtual environment directory and others
 venv/
 .env
 app_nologin.py
-
+.DS_Store

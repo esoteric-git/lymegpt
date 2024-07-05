@@ -101,7 +101,7 @@ def login():
         if submit_button:
             if username == "lyme" and password == "lyme":  # Hardcoded credentials
                 st.session_state["logged_in"] = True
-                st.experimental_rerun()  # Force rerun to update the state immediately
+                st.rerun()  # Force rerun to update the state immediately
             else:
                 st.error("Invalid username or password")
 
